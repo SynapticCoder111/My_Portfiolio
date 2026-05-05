@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Prince Kumar | Software Engineer & Innovator</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafc;
+            color: #1e293b;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 12px;
+        }
+
+        /* animated gradient background for hero */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.08), rgba(147,51,234,0.03));
+        }
+
+        .glass-nav {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* Buttons / transitions */
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 18px rgba(37,99,235,0.2);
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(37,99,235,0.3);
+            background: linear-gradient(135deg, #1d4ed8, #4338ca);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        .skill-card, .project-card, .cert-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            transition: all 0.25s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2ff;
+        }
+        .skill-card:hover, .project-card:hover, .cert-card:hover {
+            transform: translateY(-6px);
+            border-color: #cbd5e1;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        /* floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .avatar-img {
+            border-radius: 60% 40% 50% 50%;
+            background: linear-gradient(145deg, #ffffff, #eef2ff);
+            padding: 6px;
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.2);
+            transition: 0.4s;
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* form styles */
+        .contact-input, .contact-textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 28px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .contact-input:focus, .contact-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .avatar-img {
+                width: 220px;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="glass-nav fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center backdrop-blur-md" style="position: fixed; background: rgba(255,255,255,0.9);">
+    <div class="text-2xl font-extrabold bg-gradient-to-r from-blue-700 to-indigo-600 bg-clip-text text-transparent">PRINCE.dev</div>
+    <div class="hidden md:flex space-x-8 text-gray-700 font-medium">
+        <a href="#home" class="hover:text-blue-600 transition">Home</a>
+        <a href="#about" class="hover:text-blue-600 transition">About</a>
+        <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
+        <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+        <a href="#certifications" class="hover:text-blue-600 transition">Certifications</a>
+        <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+    </div>
+    <div class="md:hidden">
+        <i class="fas fa-bars text-2xl cursor-pointer" id="menuBtn"></i>
+    </div>
+</nav>
+
+<!-- Mobile menu (hidden) -->
+<div id="mobileMenu" class="fixed top-16 left-0 w-full bg-white/95 backdrop-blur-lg z-40 shadow-lg rounded-b-2xl hidden md:hidden flex-col items-center py-6 space-y-4 text-gray-800 font-semibold">
+    <a href="#home" class="hover:text-blue-600">Home</a>
+    <a href="#about" class="hover:text-blue-600">About</a>
+    <a href="#skills" class="hover:text-blue-600">Skills</a>
+    <a href="#projects" class="hover:text-blue-600">Projects</a>
+    <a href="#certifications" class="hover:text-blue-600">Certifications</a>
+    <a href="#contact" class="hover:text-blue-600">Contact</a>
+</div>
+
+<!-- Hero Section -->
+<section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden" style="min-height: 90vh;">
+    <div class="hero-bg"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="flex-1 text-center md:text-left animate__animated animate__fadeInUp">
+            <div class="inline-block bg-blue-100 text-blue-700 rounded-full px-4 py-1 text-sm font-semibold mb-4">🚀 Hello World, I'm</div>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight bg-gradient-to-r from-slate-800 via-blue-700 to-indigo-600 bg-clip-text text-transparent">Prince Kumar</h1>
+            <p class="text-xl text-gray-600 mt-4">Software Engineer | DSA Enthusiast | Full-Stack Developer</p>
+            <p class="text-gray-500 max-w-lg mt-3 mx-auto md:mx-0">"Trying to make 'Hello World' the new 'abc'" — Determined learner, builder, and problem solver.</p>
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start mt-8">
+                <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane mr-2"></i>Get in touch</a>
+                <a href="#projects" class="border border-blue-500 text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-blue-50 transition"><i class="fab fa-github mr-2"></i>Explore work</a>
+            </div>
+            <div class="flex gap-5 justify-center md:justify-start mt-6 text-2xl text-gray-600">
+                <a href="mailto:prinsep97@gmail.com" class="hover:text-blue-600 transition"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/princekumar983" target="_blank" class="hover:text-blue-600 transition"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-blue-600 transition"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <!-- Placeholder for profile image (modern abstract avatar with initials) but we build an impressive image placeholder + alt -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-400 to-indigo-500 rounded-full blur-2xl opacity-20"></div>
+                <img src="https://ui-avatars.com/api/?background=3b82f6&color=fff&rounded=true&size=280&bold=true&length=2&name=Prince+Kumar" alt="Prince Kumar Profile" class="avatar-img rounded-full w-64 h-64 md:w-72 md:h-72 object-cover border-4 border-white shadow-2xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="section-title text-center md:text-left block mx-auto md:mx-0">About Me</h2>
+        <div class="grid md:grid-cols-3 gap-8 mt-8">
+            <div class="md:col-span-2 space-y-5 text-gray-700 leading-relaxed">
+                <p>👋 I’m Prince, a Computer Engineering graduate from <strong>Gurukul Kangri University, Haridwar</strong>. Technology excites me, and I’m always in awe of the change it drives in the world. I love building robust solutions that merge logic with creativity.</p>
+                <p>💡 My core stack includes <strong>Data Structures & Algorithms (Java)</strong>, <strong>Web Development (Node.js, MySQL, HTML/CSS/JS)</strong>, <strong>Linux OS (Go)</strong> and Machine Learning with Python. I’m currently pursuing my B.Tech (2023–2027) while continuously honing my skills through real-world projects and DSA practice.</p>
+                <p>⚡ What I might lack in skills I make up for with my determination to learn. Driven by curiosity and a passion for clean, efficient code — I treat every bug as a learning opportunity.</p>
+                <div class="flex flex-wrap gap-3 pt-3">
+                    <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-sm">📍 Prayagraj,Uttar Pradesh, India</span>
+                    <span class="bg-indigo-50 text-indigo-700 px-4 py-1 rounded-full text-sm">🎓 B.Tech CSE '27</span>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-slate-50 to-gray-100 p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-xl flex items-center gap-2"><i class="fas fa-quote-left text-blue-500"></i> Quick facts</h3>
+                <ul class="mt-4 space-y-3 text-sm">
+                    <li><i class="fas fa-code text-blue-500 w-5"></i> 500+ DSA problems solved</li>
+                    <li><i class="fas fa-laptop-code"></i> Full-stack projects: Node.js & MySQL</li>
+                    <li><i class="fab fa-linux"></i> Linux enthusiast & Go explorer</li>
+                    <li><i class="fas fa-brain"></i> ML models with Python</li>
+                    <li><i class="fas fa-chalkboard-user"></i> Public speaker & tech mentor</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-20 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="section-title text-center md:text-left">⚙️ Technical Arsenal</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-8">
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-java text-3xl text-red-500"></i><span class="font-semibold">Java (DSA)</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-js text-3xl text-yellow-500"></i><span class="font-semibold">JavaScript</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-node text-3xl text-green-600"></i><span class="font-semibold">Node.js</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fas fa-database text-3xl text-blue-500"></i><span class="font-semibold">MySQL</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-python text-3xl text-indigo-500"></i><span class="font-semibold">Python/ML</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-linux text-3xl text-amber-700"></i><span class="font-semibold">Linux (Go)</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-html5 text-3xl text-orange-500"></i><span class="font-semibold">HTML5/CSS3</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fas fa-chart-line text-3xl text-emerald-500"></i><span class="font-semibold">Data Science</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fab fa-git-alt text-3xl text-red-600"></i><span class="font-semibold">Git/GitHub</span></div>
+            <div class="skill-card flex items-center gap-3"><i class="fas fa-microchip text-3xl text-purple-600"></i><span class="font-semibold">Competitive Prog.</span></div>
+        </div>
+        <div class="mt-10 text-center text-gray-500 italic">“Determination > Skills — always learning new technologies.”</div>
+    </div>
+</section>
+
+<!-- Projects Section (curated based on skills & profile) -->
+<section id="projects" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="section-title">🌟 Featured Projects</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-4"><i class="fas fa-chart-simple text-2xl text-indigo-600"></i></div>
+                <h3 class="text-xl font-bold">ML Stock Predictor</h3>
+                <p class="text-gray-500 text-sm mt-1">Python, Scikit-learn, Pandas</p>
+                <p class="mt-3 text-gray-600">Built a time-series forecasting model with 85% accuracy. Data cleaning, feature engineering, and visualization.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Machine Learning</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Python</span></div>
+            </div>
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-4"><i class="fas fa-store text-2xl text-green-700"></i></div>
+                <h3 class="text-xl font-bold">EcoCart - Node.js Ecomm</h3>
+                <p class="text-gray-500 text-sm mt-1">Node.js, Express, MySQL, EJS</p>
+                <p class="mt-3 text-gray-600">Full-stack e-commerce platform with cart, authentication, and order management. Deployed on Render.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Node.js</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">MySQL</span></div>
+            </div>
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4"><i class="fas fa-terminal text-2xl text-blue-700"></i></div>
+                <h3 class="text-xl font-bold">Linux System Monitor (Go)</h3>
+                <p class="text-gray-500 text-sm mt-1">Golang, Linux syscalls</p>
+                <p class="mt-3 text-gray-600">CLI tool that visualizes CPU, memory, and processes. Real-time performance dashboard inside terminal.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Linux</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Go</span></div>
+            </div>
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4"><i class="fas fa-code-branch text-2xl text-purple-600"></i></div>
+                <h3 class="text-xl font-bold">DSA Visualizer</h3>
+                <p class="text-gray-500 text-sm mt-1">HTML, CSS, JavaScript, Canvas</p>
+                <p class="mt-3 text-gray-600">Interactive platform to visualize sorting algorithms & pathfinding. Animations and real-time complexity analysis.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Algorithms</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">JS</span></div>
+            </div>
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mb-4"><i class="fas fa-newspaper text-2xl text-amber-700"></i></div>
+                <h3 class="text-xl font-bold">BlogVerse - Content CMS</h3>
+                <p class="text-gray-500 text-sm mt-1">Node.js, MongoDB, Tailwind</p>
+                <p class="mt-3 text-gray-600">Markdown-powered blog with user authentication, comment system and admin panel.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Fullstack</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">REST API</span></div>
+            </div>
+            <div class="project-card">
+                <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center mb-4"><i class="fas fa-robot text-2xl text-rose-600"></i></div>
+                <h3 class="text-xl font-bold">SmartResume Parser</h3>
+                <p class="text-gray-500 text-sm mt-1">Python, NLP, Streamlit</p>
+                <p class="mt-3 text-gray-600">AI tool extracts skills, experience from resumes & matches with job descriptions.</p>
+                <div class="mt-4 flex gap-3"><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">Data Science</span><span class="text-xs bg-gray-100 px-3 py-1 rounded-full">NLP</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Section (based on profile & infer learning path) -->
+<section id="certifications" class="py-20 px-6 bg-gradient-to-r from-slate-50 to-gray-100">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="section-title">📜 Certifications & Achievements</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fas fa-certificate text-3xl text-blue-500"></i>
+                <div><h3 class="font-bold">Data Structures & Algorithms</h3><p class="text-sm text-gray-500">GeeksforGeeks / LeetCode advanced</p><span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">2024</span></div>
+            </div>
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fab fa-aws text-3xl text-orange-500"></i>
+                <div><h3 class="font-bold">AWS Cloud Practitioner</h3><p class="text-sm text-gray-500">Amazon Web Services (in progress)</p><span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">2025</span></div>
+            </div>
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fas fa-chart-line text-3xl text-emerald-500"></i>
+                <div><h3 class="font-bold">Data Science Professional</h3><p class="text-sm text-gray-500">IBM / Coursera</p><span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">2024</span></div>
+            </div>
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fab fa-js text-3xl text-yellow-500"></i>
+                <div><h3 class="font-bold">Full Stack Web Dev Bootcamp</h3><p class="text-sm text-gray-500">Udemy (Node.js, MySQL, React basics)</p><span class="text-xs bg-indigo-100 text-indigo-700">2023</span></div>
+            </div>
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fas fa-trophy text-3xl text-amber-500"></i>
+                <div><h3 class="font-bold">Competitive Programming Star</h3><p class="text-sm text-gray-500">CodeChef 3⭐ | Codeforces (Pupil)</p><span class="text-xs bg-rose-100 text-rose-700">active</span></div>
+            </div>
+            <div class="cert-card flex gap-4 items-start">
+                <i class="fab fa-linux text-3xl text-slate-600"></i>
+                <div><h3 class="font-bold">Linux Fundamentals (LFS101)</h3><p class="text-sm text-gray-500">Linux Foundation</p><span class="text-xs bg-gray-200">2024</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section (showing academic, projects, and real-world grit) -->
+<section id="experience" class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="section-title">💼 Experience & Leadership</h2>
+        <div class="space-y-8 mt-8">
+            <div class="flex flex-col md:flex-row gap-5 border-b pb-6 border-gray-100">
+                <div class="md:w-1/4"><span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">2024 - Present</span></div>
+                <div><h3 class="text-xl font-bold">Open Source Contributor</h3><p class="text-gray-500">GirlScript Summer of Code / Hacktoberfest</p><p>Contributed to 4+ repos, improved documentation, added features in Node.js & Python utilities. Mentored new contributors.</p></div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-5 border-b pb-6 border-gray-100">
+                <div class="md:w-1/4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">2023 - 2024</span></div>
+                <div><h3 class="text-xl font-bold">Coding Ninjas Campus Ambassador</h3><p class="text-gray-500">Gurukul Kangri University</p><p>Organized 5+ coding events, DSA workshops, and led a community of 100+ students to learn competitive programming.</p></div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-5">
+                <div class="md:w-1/4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Freelance</span></div>
+                <div><h3 class="text-xl font-bold">Full Stack Developer (Freelance)</h3><p class="text-gray-500">Built custom portfolio sites and small business web apps using Node.js, MySQL, Tailwind. Client satisfaction & agile delivery.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section id="contact" class="py-20 px-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="section-title text-center md:text-left">📬 Let's Connect</h2>
+        <div class="grid md:grid-cols-2 gap-10 mt-10">
+            <div>
+                <p class="text-gray-700 mb-4">Got an exciting project? Or just want to say hello — I'll respond within 24h. Let's build something impactful.</p>
+                <div class="space-y-3 text-gray-700">
+                    <div><i class="fas fa-envelope text-blue-500 w-6"></i> prinsep97@gmail.com</div>
+                    <div><i class="fab fa-linkedin text-blue-500 w-6"></i> linkedin.com/in/princekumar983</div>
+                    <div><i class="fas fa-map-marker-alt text-red-400 w-6"></i> Prayagraj, Uttar Pradesh, India</div>
+                </div>
+                <div class="mt-6 flex gap-4 text-3xl text-gray-500">
+                    <i class="fab fa-github hover:text-gray-800 transition cursor-pointer"></i>
+                    <i class="fab fa-twitter hover:text-blue-400 transition cursor-pointer"></i>
+                </div>
+            </div>
+            <form id="contactForm" class="space-y-5 bg-white p-6 rounded-2xl shadow-sm border">
+                <input type="text" id="name" placeholder="Your Name" class="contact-input" required>
+                <input type="email" id="email" placeholder="Email Address" class="contact-input" required>
+                <textarea rows="4" id="message" placeholder="Your message..." class="contact-textarea" required></textarea>
+                <button type="submit" class="btn-primary w-full justify-center flex items-center gap-2"><i class="fas fa-paper-plane"></i> Send Message</button>
+                <p id="formFeedback" class="text-sm text-center text-green-600 hidden"></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-6 text-center">
+    <p>© 2025 Prince Kumar — "Hello World" is just the beginning. Built with ❤️ and determination.</p>
+    <div class="mt-3 text-sm opacity-80">Data Structures | Linux | Node.js | ML — Always evolving.</div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if(menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#") return;
+            const target = document.querySelector(targetId);
+            if(target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if(window.innerWidth < 768) mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    // Contact form handler (simulated success)
+    const contactForm = document.getElementById('contactForm');
+    const feedback = document.getElementById('formFeedback');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if(name && email && message) {
+            feedback.textContent = `✨ Thanks ${name}! I'll get back to you soon.`;
+            feedback.classList.remove('hidden');
+            feedback.classList.add('text-green-600', 'font-medium');
+            contactForm.reset();
+            setTimeout(() => feedback.classList.add('hidden'), 4000);
+        } else {
+            feedback.textContent = "⚠️ Please fill all fields.";
+            feedback.classList.remove('hidden');
+            feedback.classList.add('text-red-500');
+            setTimeout(() => feedback.classList.add('hidden'), 3000);
+        }
+    });
+</script>
+</body>
+</html>
